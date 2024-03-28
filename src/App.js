@@ -21,7 +21,14 @@ const initialFriends = [
 
 
 export default function App() {
-  return <div>
-    <h1>Hello World</h1>
+  return <div className="app">
+    <div className="sidebar">
+      <h1>Hello World</h1>
+      <FriendList />
+    </div>
   </div>
+}
+
+function FriendList() {
+  return <ul>List</ul>
 }
