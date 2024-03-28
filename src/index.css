@@ -1,7 +1,7 @@
 :root {
-  --color-lightest: #fcf9f5;
-  --color-light: #fff6eb;
-  --color-medium: #e6cff4;
+  --color-lightest: #ffe7c7;
+  --color-light: #f4c790;
+  --color-medium: #d9b1f3;
   --color-dark: #922aaa;
 }
 
@@ -125,6 +125,7 @@ form {
   grid-template-columns: 1fr 1.5fr;
   margin-bottom: 1.6rem;
   padding: 1.2rem;
+  background-color: var(--color-medium);
 }
 .form-split-bill {
   grid-template-columns: 1fr 12rem;
