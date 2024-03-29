@@ -26,24 +26,30 @@ function Button({children, onClick}) {
 }
 
 export default function App() {
+
+  const [friends, setFriends] = useState(initialFriends);
+
   const [showAddFriend, setShowAddFriend] = useState(true);
 
   function handleShowAddFriend() {
     setShowAddFriend((show) => !show);
   }
 
+  function handleAddFriend(friend) {
+    setFriends((friends) => [...friends, friend]);
+  }
+
   return <div className="app">
     <div className="sidebar">
-      <FriendList />
-      {showAddFriend && <FormAddFriend />}
+      <FriendList friends={friends}/>
+      {showAddFriend && <FormAddFriend onAddFriend={handleAddFriend}/>}
       <Button onClick={handleShowAddFriend} >{showAddFriend ? "Close" : "Add Friend"}</Button>
     </div>
     <FormSplitBill />
   </div>
 }
 
-function FriendList() {
-  const friends = initialFriends;
+function FriendList({friends}) {
 
   return (
     <ul>
@@ -67,7 +73,7 @@ function Friend({friend}){
     </li>
 }
 
-function FormAddFriend() {
+function FormAddFriend({onAddFriend}) {
 
   const [name, setName] = useState("");
   const [image, setImage] = useState("https://i.pravatar.cc/48");
@@ -88,7 +94,7 @@ function FormAddFriend() {
       balance: 0,
     };
 
-    console.log(newFriend);
+    onAddFriend(newFriend);
 
     setName("");
     setImage("https://i.pravatar.cc/48");
