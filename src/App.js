@@ -43,7 +43,8 @@ export default function App() {
   }
 
   function handleSelectedFriend(friend) {
-    setSelectedFriend(friend);
+    setSelectedFriend(curr => curr?.id === friend.id ? null : friend);
+    setShowAddFriend(false);
   }
 
   return <div className="app">
@@ -72,14 +73,17 @@ function FriendList({friends, onSelectedFriend, selectedFriend}) {
   );
 }
 
-function Friend({friend, onSelectedFriend}){
-  return <li>
+function Friend({friend, onSelectedFriend, selectedFriend}){
+
+  const isSelected = selectedFriend?.id === friend.id;
+
+  return <li className={isSelected ? "selected" : ""}>
       <img src={friend.image} alt={friend.name} />
       <h3>{friend.name}</h3>
       {friend.balance < 0 && <p className="red">You owe {friend.name} R${Math.abs(friend.balance)}</p>}
       {friend.balance > 0 && <p className="green">{friend.name} owes you R${Math.abs(friend.balance)}</p>}
       {friend.balance === 0 && <p className="blue"> You and {friend.name} are even R${Math.abs(friend.balance)}</p>}
-      <Button onClick={() => onSelectedFriend(friend)}>Select</Button>
+      <Button onClick={() => onSelectedFriend(friend)}>{isSelected? "Close" : "Selected"}</Button>
     </li>
 }
 
